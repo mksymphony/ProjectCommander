@@ -10,6 +10,8 @@ public class ShooterLook : MonoBehaviour
     [SerializeField] private float _xSensitivity = 30f;
     [SerializeField] private float _ySensitivity = 30f;
 
+
+    public Camera cam => _shooterCam;
     public float xSensitivity => _xSensitivity;
     public float ySensitivity => _ySensitivity;
 
