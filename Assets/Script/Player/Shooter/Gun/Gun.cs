@@ -16,7 +16,10 @@ public class Gun : MonoBehaviour
     }
     private void Update()
     {
-        _currCoolDown -= Time.deltaTime;
+        if (_currCoolDown <= 0)
+            _currCoolDown = 0;
+        else
+            _currCoolDown -= Time.deltaTime;
     }
     public void Shoot()
     {
