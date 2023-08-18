@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class ShooterInputManager : MonoBehaviour
 {
     [SerializeField] private ShooterInput _input;
+    [SerializeField] private Gun _gun;
     ShooterInput.ShooterMoveActions _sAction;
     private ShooterMotor _sMotor;
     private ShooterLook _sLook;
@@ -17,6 +18,7 @@ public class ShooterInputManager : MonoBehaviour
         _sMotor = GetComponent<ShooterMotor>();
         _sLook = GetComponent<ShooterLook>();
         _sAction.Jump.performed += ctx => _sMotor.Jump();
+        _sAction.Shoot.performed += ctx => _gun.Shoot();
     }
     private void FixedUpdate()
     {
