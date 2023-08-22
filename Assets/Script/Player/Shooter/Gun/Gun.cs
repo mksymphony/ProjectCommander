@@ -13,13 +13,9 @@ public class Gun : MonoBehaviour
 
     [SerializeField] private float _currCoolDown;
 
-    private float _aniTime = 0.1f;
-    private float _currAniTime;
-
     private void Awake()
     {
         _currCoolDown = _fireCoolDown;
-        _aniTime = _currAniTime;
         _ani = GetComponent<Animator>();
     }
     private void Update()
@@ -30,14 +26,6 @@ public class Gun : MonoBehaviour
         }
         else
             _currCoolDown -= Time.deltaTime;
-
-        //if (_currAniTime <= 0 && _currCoolDown <= 0)
-        //{
-        //    _currAniTime = 0;
-        //    _ani.SetBool("Shoot", false);
-        //}
-        //else
-        //    _currCoolDown -= Time.deltaTime;
     }
     public void Shoot()
     {
