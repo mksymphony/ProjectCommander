@@ -390,8 +390,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11c5676ad63f6441b4b673f2d51a4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _guns: {fileID: 867889039}
   _damage: 1
-  _bulletRange: 10
+  _ammo: 0
+  _range: 0
   _playerCam: {fileID: 369582611}
 --- !u!114 &566436104
 MonoBehaviour:
@@ -662,10 +664,6 @@ MonoBehaviour:
   _textAssetData: {fileID: 4900000, guid: 921be8ad4e7c83e46ae2df535ff92f62, type: 3}
   myGunList:
     Guns: []
-    name: 
-    power: 0
-    ammo: 0
-    range: 0
 --- !u!1 &1031440074
 GameObject:
   m_ObjectHideFlags: 0

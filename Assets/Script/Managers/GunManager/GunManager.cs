@@ -49,4 +49,27 @@ public class GunManager : MonoBehaviour
             myGunList.Guns[i].range = int.Parse(data[4 * (i + 1) + 3]);
         }
     }
+
+    public Gun SendGunsData(string GunName, ref Gun gun)
+    {
+        Debug.Log(GunName);
+        Debug.Log(gun);
+        int value = 0;
+        switch (GunName)
+        {
+            case "M1911":
+                value = 0;
+                break;
+            case "Thompson":
+                value = 1;
+                break;
+            case "HK416":
+                value = 2;
+                break;
+            case "Repeater":
+                value = 3;
+                break;
+        }
+        return gun = myGunList.Guns[value];
+    }
 }
