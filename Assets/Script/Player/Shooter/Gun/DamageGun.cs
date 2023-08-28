@@ -13,12 +13,22 @@ public class DamageGun : MonoBehaviour
 
     [SerializeField] private Transform _playerCam;
 
-    [SerializeField]private GunManager.Gun gunName;
+    [SerializeField] private GunManager.Gun gunName;
 
     private void Start()
     {
         _guns.SendGunsData("M1911", ref gunName);
         SetValue();
+    }
+    private void Update()
+    {
+        DrawRay();
+    }
+
+    private void DrawRay()
+    {
+        Ray gunray = new Ray(_playerCam.position, _playerCam.forward);
+        Debug.DrawRay(_playerCam.transform.position, _playerCam.forward, Color.red, _range);
     }
 
     private void SetValue()
@@ -33,7 +43,6 @@ public class DamageGun : MonoBehaviour
         Ray gunray = new Ray(_playerCam.position, _playerCam.forward);
         if (Physics.Raycast(gunray, out RaycastHit hitInfo, _range))
         {
-            Debug.DrawRay(_playerCam.transform.position, _playerCam.forward);
             if (hitInfo.collider.gameObject.TryGetComponent(out Entity enemy))
             {
                 enemy.Health -= _damage;
