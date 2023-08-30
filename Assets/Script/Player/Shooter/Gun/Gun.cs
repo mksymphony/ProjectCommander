@@ -33,9 +33,9 @@ public class Gun : MonoBehaviour
         {
             if (_currCoolDown <= 0f)
             {
+                StartCoroutine(StartRecoil());
                 _onGunShoot?.Invoke();
                 _currCoolDown = _fireCoolDown;
-                StartCoroutine(StartRecoil());
             }
         }
     }

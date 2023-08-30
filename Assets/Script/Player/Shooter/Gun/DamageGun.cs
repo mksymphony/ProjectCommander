@@ -20,17 +20,6 @@ public class DamageGun : MonoBehaviour
         _guns.SendGunsData("M1911", ref gunName);
         SetValue();
     }
-    private void Update()
-    {
-        DrawRay();
-    }
-
-    private void DrawRay()
-    {
-        Ray gunray = new Ray(_playerCam.position, _playerCam.forward);
-        Debug.DrawRay(_playerCam.transform.position, _playerCam.forward, Color.red, _range);
-    }
-
     private void SetValue()
     {
         _damage = gunName.power;
