@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     //GunManager _gunData = new GunManager();
     //public static GunManager GunInstance { get { return Instance._gunData; } }
 
-    DamageGun _gunDamage = new DamageGun();
-    public static DamageGun GunDamageInstance { get { return Instance._gunDamage; } }
+    GunSetting _gunSetting = new GunSetting();
+    public static GunSetting GunSettingInstance { get { return Instance._gunSetting; } }
 
     CSVReader _CSVInstance = new CSVReader();
     public static CSVReader CSVInstance { get { return Instance._CSVInstance; } }

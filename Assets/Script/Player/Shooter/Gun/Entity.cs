@@ -16,7 +16,6 @@ public class Entity : MonoBehaviour
         set
         {
             _health = value;
-            Debug.Log(_health);
             if (_health <= 0)
             {
                 Destroy(gameObject);
@@ -24,10 +23,11 @@ public class Entity : MonoBehaviour
         }
     }
     [SerializeField] private Transform _target;
-    [SerializeField]private NavMeshAgent _nav;
+    [SerializeField] private NavMeshAgent _nav;
 
     private void Awake()
     {
+        _target = GameObject.FindGameObjectWithTag("Player").transform;
         Health = _startingHealth;
     }
     private void Update()

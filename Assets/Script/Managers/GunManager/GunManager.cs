@@ -52,22 +52,26 @@ public class GunManager : MonoBehaviour
 
     public Gun SendGunsData(string GunName, ref Gun gun)
     {
-        Debug.Log(GunName);
-        Debug.Log(gun);
         int value = 0;
         switch (GunName)
         {
-            case "M1911":
+            case "DsertEagle":
                 value = 0;
                 break;
-            case "Thompson":
+            case "Revolver":
                 value = 1;
                 break;
-            case "HK416":
+            case "FNScsr":
                 value = 2;
                 break;
-            case "Repeater":
+            case "Famas":
                 value = 3;
+                break;
+            case "AK47":
+                value = 4;
+                break;
+            case "M82":
+                value = 5;
                 break;
         }
         return gun = myGunList.Guns[value];

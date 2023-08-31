@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageGun : MonoBehaviour
+public class GunSetting : MonoBehaviour
 {
     [SerializeField] private GunManager _guns;
 
@@ -12,12 +12,13 @@ public class DamageGun : MonoBehaviour
     [SerializeField] private int _range;
 
     [SerializeField] private Transform _playerCam;
-
     [SerializeField] private GunManager.Gun gunName;
+    private AudioSource _gunSound;
 
     private void Start()
     {
-        _guns.SendGunsData("M1911", ref gunName);
+        _gunSound = GetComponent<AudioSource>();
+        _guns.SendGunsData("DsertEagle", ref gunName);
         SetValue();
     }
     private void SetValue()
@@ -30,6 +31,7 @@ public class DamageGun : MonoBehaviour
     public void Shoot()
     {
         Ray gunray = new Ray(_playerCam.position, _playerCam.forward);
+        _gunSound.Play();
         if (Physics.Raycast(gunray, out RaycastHit hitInfo, _range))
         {
             if (hitInfo.collider.gameObject.TryGetComponent(out Entity enemy))
