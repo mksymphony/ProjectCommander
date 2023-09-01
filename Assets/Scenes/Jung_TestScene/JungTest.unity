@@ -921,9 +921,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _ani: {fileID: 1309528171}
+  _gunSetting: {fileID: 1309528170}
   _fireCoolDown: 0.5
   _isAuto: 1
   _currCoolDown: 0
+  _ammo: 0
 --- !u!114 &1309528170
 MonoBehaviour:
   m_ObjectHideFlags: 0

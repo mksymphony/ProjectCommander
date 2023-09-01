@@ -15,6 +15,7 @@ public class GunSetting : MonoBehaviour
     [SerializeField] private GunManager.Gun gunName;
     private AudioSource _gunSound;
 
+    public int ammo => _ammo;
     private void Start()
     {
         _gunSound = GetComponent<AudioSource>();

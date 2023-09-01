@@ -7,19 +7,30 @@ public class Gun : MonoBehaviour
 {
     [SerializeField] private UnityEvent _onGunShoot;
     [SerializeField] private Animator _ani;
+    [SerializeField] private GunSetting _gunSetting;
     [SerializeField] private float _fireCoolDown;
 
     [SerializeField] private bool _isAuto;
 
     [SerializeField] private float _currCoolDown;
-
+    [SerializeField] private int _ammo;
     private void Awake()
     {
         _currCoolDown = _fireCoolDown;
         _ani = GetComponent<Animator>();
+        _gunSetting = GetComponent<GunSetting>();
+    }
+    private void Start()
+    {
+        _ammo = _gunSetting.ammo;
     }
     private void Update()
     {
+        if (_ammo == 0)
+        {
+            _ani.SetBool("Ammo", true);
+            StartCoroutine(Reload());
+        }
         if (_currCoolDown <= 0)
         {
             _currCoolDown = 0;
@@ -36,8 +47,17 @@ public class Gun : MonoBehaviour
                 StartCoroutine(StartRecoil());
                 _onGunShoot?.Invoke();
                 _currCoolDown = _fireCoolDown;
+                _ammo--;
             }
         }
+    }
+    IEnumerator Reload()
+    {
+        _ani.SetBool("Ammo", false);
+        _ani.SetBool("Reload", true);
+        yield return new WaitForSeconds(1f);
+        _ani.SetBool("Reload", false);
+        _ammo = _gunSetting.ammo;
     }
     IEnumerator StartRecoil()
     {
