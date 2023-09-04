@@ -31,14 +31,14 @@ public class GunSetting : MonoBehaviour
 
     public void Shoot()
     {
-        Ray gunray = new Ray(_playerCam.position, _playerCam.forward);
+        RaycastHit hit;
         _gunSound.Play();
-        if (Physics.Raycast(gunray, out RaycastHit hitInfo, _range))
+        if (Physics.Raycast(gameObject.transform.position, transform.forward, out hit, _range))
         {
-            if (hitInfo.collider.gameObject.TryGetComponent(out Entity enemy))
+            if (hit.collider.gameObject.TryGetComponent(out Entity enemy))
             {
                 enemy.Health -= _damage;
-                Debug.Log("Shoot");
+                Debug.DrawLine(transform.position, hit.point, Color.red, _range);
             }
         }
     }

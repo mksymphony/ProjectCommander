@@ -26,11 +26,6 @@ public class Gun : MonoBehaviour
     }
     private void Update()
     {
-        if (_ammo == 0)
-        {
-            _ani.SetBool("Ammo", true);
-            StartCoroutine(Reload());
-        }
         if (_currCoolDown <= 0)
         {
             _currCoolDown = 0;
@@ -50,14 +45,6 @@ public class Gun : MonoBehaviour
                 _ammo--;
             }
         }
-    }
-    IEnumerator Reload()
-    {
-        _ani.SetBool("Ammo", false);
-        _ani.SetBool("Reload", true);
-        yield return new WaitForSeconds(1f);
-        _ani.SetBool("Reload", false);
-        _ammo = _gunSetting.ammo;
     }
     IEnumerator StartRecoil()
     {

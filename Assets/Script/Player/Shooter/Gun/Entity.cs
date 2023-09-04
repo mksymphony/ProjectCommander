@@ -5,7 +5,18 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Entity : MonoBehaviour
 {
+    private enum Motion
+    {
+        None,
+        Spawn,
+        Move,
+        Attack,
+        Death,
+    }
     [SerializeField] private float _startingHealth;
+    [SerializeField] private Animator _Ani;
+
+    private bool _Death = false;
     private float _health;
     public float Health
     {
@@ -18,7 +29,11 @@ public class Entity : MonoBehaviour
             _health = value;
             if (_health <= 0)
             {
-                Destroy(gameObject);
+                _Ani.SetBool("IsDead", true);
+                _Ani.SetBool("Move", false);
+                _nav.speed = 0f;
+                _Death = true;
+                Destroy(gameObject, 10f);
             }
         }
     }
@@ -29,14 +44,24 @@ public class Entity : MonoBehaviour
     {
         _target = GameObject.FindGameObjectWithTag("Player").transform;
         Health = _startingHealth;
+        StartCoroutine(Spawn());
+    }
+
+    private IEnumerator Spawn()
+    {
+        _Ani.SetBool("IsSpawn", true);
+        yield return new WaitForSeconds(2);
+        _Ani.SetBool("IsSpawn", false);
     }
     private void Update()
     {
-        Destination();
+        if (_Death == false)
+            Destination();
     }
 
     private void Destination()
     {
         _nav.SetDestination(_target.position);
+        _Ani.SetBool("Move", _nav.velocity.magnitude > 0.1f);
     }
 }
