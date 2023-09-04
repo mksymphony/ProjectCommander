@@ -5,17 +5,10 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Entity : MonoBehaviour
 {
-    private enum Motion
-    {
-        None,
-        Spawn,
-        Move,
-        Attack,
-        Death,
-    }
     [SerializeField] private float _startingHealth;
+    [SerializeField] private GameObject _deadBlood;
     [SerializeField] private Animator _Ani;
-
+    [SerializeField] private Collider _col;
     private bool _Death = false;
     private float _health;
     public float Health
@@ -31,9 +24,11 @@ public class Entity : MonoBehaviour
             {
                 _Ani.SetBool("IsDead", true);
                 _Ani.SetBool("Move", false);
+                Destroy(gameObject, 10f);
+                Instantiate(_deadBlood, transform);
                 _nav.speed = 0f;
                 _Death = true;
-                Destroy(gameObject, 10f);
+                _col.enabled = false;
             }
         }
     }

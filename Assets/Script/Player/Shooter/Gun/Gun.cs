@@ -13,7 +13,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private bool _isAuto;
 
     [SerializeField] private float _currCoolDown;
-    [SerializeField] private int _ammo;
+    [SerializeField] private Transform _shootPoint;
+    [SerializeField] private GameObject _shootParticle;
     private void Awake()
     {
         _currCoolDown = _fireCoolDown;
@@ -22,7 +23,7 @@ public class Gun : MonoBehaviour
     }
     private void Start()
     {
-        _ammo = _gunSetting.ammo;
+
     }
     private void Update()
     {
@@ -42,7 +43,8 @@ public class Gun : MonoBehaviour
                 StartCoroutine(StartRecoil());
                 _onGunShoot?.Invoke();
                 _currCoolDown = _fireCoolDown;
-                _ammo--;
+                var particel = Instantiate(_shootParticle);
+                particel.transform.position = _shootPoint.transform.position;
             }
         }
     }

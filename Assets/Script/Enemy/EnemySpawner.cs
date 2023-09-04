@@ -4,28 +4,33 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private float _spawnRate;
+    [SerializeField] private int _spawnRate;
     [SerializeField] private GameObject[] _enemyPrefab;
     [SerializeField] private Transform[] _spawnPosition;
 
-    private int _maxSpawn;
+    [SerializeField] private int _maxSpawn;
+    private int _currSpawn = 0;
 
     private void Awake()
     {
-        _maxSpawn = RandomValueSender(50);
-        StartCoroutine(Spawner());
+        _maxSpawn = RandomValueSender(100);
+
     }
-
-    private IEnumerator Spawner()
+    private void Update()
     {
-        WaitForSeconds waitTime = new WaitForSeconds(_spawnRate);
-
-        while (_maxSpawn > 0)
+        if (_maxSpawn >= _currSpawn)
         {
-            yield return waitTime;
-            int randPosition = RandomValueSender(10);
-            Instantiate(_enemyPrefab[0], _spawnPosition[randPosition].transform.position, Quaternion.identity);
+            StartCoroutine(SpawnEnemy());
+            _currSpawn++;
         }
+    }
+    private IEnumerator SpawnEnemy()
+    {
+        _spawnRate = RandomValueSender(30);
+
+        yield return new WaitForSeconds(_spawnRate);
+        int randPosition = RandomValueSender(_spawnPosition.Length);
+        Instantiate(_enemyPrefab[0], _spawnPosition[randPosition].transform.position, Quaternion.identity);
     }
     private int RandomValueSender(int max)
     {

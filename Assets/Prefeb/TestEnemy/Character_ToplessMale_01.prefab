@@ -354,7 +354,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startingHealth: 5
+  _deadBlood: {fileID: 166404, guid: 78e1c8c5b281b8b439229473779ac9aa, type: 3}
   _Ani: {fileID: 1754571780263467101}
+  _col: {fileID: 1749302222045717503}
   _target: {fileID: 0}
   _nav: {fileID: 3580037465771198828}
 --- !u!136 &1749302222045717503
