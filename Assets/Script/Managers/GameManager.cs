@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     static GameManager s_instance;
-    static GameManager Instance { get { Init(); return s_instance; } }
+    public static GameManager Instance { get { Init(); return s_instance; } }
 
     //GunManager _gunData = new GunManager();
     //public static GunManager GunInstance { get { return Instance._gunData; } }
@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
 
     CSVReader _CSVInstance = new CSVReader();
     public static CSVReader CSVInstance { get { return Instance._CSVInstance; } }
+
+    ObjectPooler _ObjectPooler = new ObjectPooler();
+    public static ObjectPooler Pooler { get { return Instance._ObjectPooler; } }
 
     private void Awake()
     {

@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour, IObjectPool
 {
+    [SerializeField] private ObjectPooler _pooler;
     [SerializeField] private int _spawnRate;
-    [SerializeField] private GameObject[] _enemyPrefab;
     [SerializeField] private Transform[] _spawnPosition;
-
     [SerializeField] private int _maxSpawn;
     private int _currSpawn = 0;
 
-    private void Awake()
+    private void Start()
     {
         _maxSpawn = RandomValueSender(100);
 
@@ -20,17 +19,18 @@ public class EnemySpawner : MonoBehaviour
     {
         if (_maxSpawn >= _currSpawn)
         {
-            StartCoroutine(SpawnEnemy());
+            StartCoroutine(OnObjectSpawn());
             _currSpawn++;
         }
     }
-    private IEnumerator SpawnEnemy()
+    public IEnumerator OnObjectSpawn()
     {
         _spawnRate = RandomValueSender(30);
 
+
         yield return new WaitForSeconds(_spawnRate);
         int randPosition = RandomValueSender(_spawnPosition.Length);
-        Instantiate(_enemyPrefab[0], _spawnPosition[randPosition].transform.position, Quaternion.identity);
+        _pooler.SpawnFromPool("Enemy", _spawnPosition[randPosition].transform.position, Quaternion.identity);
     }
     private int RandomValueSender(int max)
     {
@@ -38,4 +38,5 @@ public class EnemySpawner : MonoBehaviour
 
         return randValue;
     }
+
 }
