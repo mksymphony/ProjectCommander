@@ -24,14 +24,21 @@ public class Entity : MonoBehaviour
             {
                 _Ani.SetBool("IsDead", true);
                 _Ani.SetBool("Move", false);
-                Destroy(gameObject, 10f);
-                Instantiate(_deadBlood, transform);
+                StartCoroutine(DeadObject());
+                Instantiate(_deadBlood);
                 _nav.speed = 0f;
                 _Death = true;
                 _col.enabled = false;
             }
         }
     }
+
+    private IEnumerator DeadObject()
+    {
+        yield return new WaitForSeconds(5f);
+        gameObject.SetActive(false);
+    }
+
     [SerializeField] private Transform _target;
     [SerializeField] private NavMeshAgent _nav;
 
