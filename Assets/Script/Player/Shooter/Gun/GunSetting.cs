@@ -38,7 +38,7 @@ public class GunSetting : MonoBehaviour
             if (hit.collider.gameObject.TryGetComponent(out Entity enemy))
             {
                 enemy.Health -= _damage;
-                Debug.DrawLine(transform.position, hit.point, Color.red, _range);
+                enemy.OnDamage();
             }
         }
     }
